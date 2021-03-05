@@ -13,26 +13,21 @@
 # Примечание: если обособление чисел кавычками не будет получаться - можете вернуться к его реализации позже. Главное: дополнить числа до двух разрядов нулём!
 
 main_list = ['в', '5', 'часов', '17', 'минут', 'температура', 'воздуха', 'была', '+5', 'градусов']
+new_list = list()
 
-i = 0
-while i < len(main_list):
-    if main_list[i].isdigit():
-        main_list[i] = f'{int(main_list[i]):02d}'
-        main_list.insert(i, '"')
-        main_list.insert(i + 2, '"')
-        i += 1
-    elif (main_list[i][1:] if main_list[i][0] in ['+','-'] else '').isdigit():
-        main_list[i] = f'{main_list[i][0]}'f'{int(main_list[i]):02d}'
-        main_list.insert(i, '"')
-        main_list.insert(i + 2, '"')
-        i += 1
-    i += 1
+for word in main_list:
+    if word.isdigit():
+        new_list.extend(['"', f'{int(word):02}', '"'])
+    elif (word[1:] if word[0] in ['+','-'] else '').isdigit():
+        new_list.extend(['"', f'{word[0]}'f'{int(word):02}', '"'])
+    else:
+        new_list.append(word)
 
-print(main_list)
+print(new_list)
 
 # После этого примера понял всю прелесть регулярок и стал жалеть что ещё их не знаю и не использую
 
-msg_str = " ".join(main_list)
+msg_str = " ".join(new_list)
 
 left_space = True
 

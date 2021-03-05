@@ -15,3 +15,36 @@
 # Вывести цены пяти самых дорогих товаров. Сможете ли вывести цены этих товаров по возрастанию, написав минимум кода?
 #
 # Задачи со * предназначены для продвинутых учеников, которым мало сделать обычное задание.
+
+price_list = [84.12, 33.2, 90.22, 12, 5, 0.12, 100.3, 75.87, 765.1, 0.3, 8.02, 8.19, 9.99]
+print(f'Оригинальный id списка цен {id(price_list)}')
+
+i = 0
+string_list = list()
+
+while i < len(price_list):
+    rub = int(price_list[i])
+    if price_list[i] % 1:
+        form_kop = (str(price_list[i])).split(".")[1]
+        kop = int(form_kop if len(form_kop) > 1 else form_kop + '0')
+        # kop = int((price_list[i] * 100) % 100)
+    else:
+        kop = 0
+
+    price_list[i] = [rub, kop]
+    string_list.append(f'{rub} руб {kop:02} коп')
+
+    i += 1
+
+print(", ".join(string_list))
+
+price_list.sort()
+print(f'id отсортированного списка цен {id(price_list)}')
+print(price_list)
+
+up_price = price_list.copy()
+print(f'id копии списка цен {id(up_price)}')
+print(sorted(up_price, reverse=True))
+
+print("Цены пяти самых дорогих товаров по возрастанию:")
+print(sorted(sorted(up_price, reverse=True)[:5]))

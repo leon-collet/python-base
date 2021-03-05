@@ -7,12 +7,12 @@ main_list = ['в', '5', 'часов', '17', 'минут', 'температур�
 i = 0
 while i < len(main_list):
     if main_list[i].isdigit():
-        main_list[i] = f'{int(main_list[i]):02d}'
+        main_list[i] = f'{int(main_list[i]):02}'
         main_list.insert(i, '"')
         main_list.insert(i + 2, '"')
         i += 1
     elif (main_list[i][1:] if main_list[i][0] in ['+','-'] else '').isdigit():
-        main_list[i] = f'{main_list[i][0]}'f'{int(main_list[i]):02d}'
+        main_list[i] = f'{main_list[i][0]}'f'{int(main_list[i]):02}'
         main_list.insert(i, '"')
         main_list.insert(i + 2, '"')
         i += 1
