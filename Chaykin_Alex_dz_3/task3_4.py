@@ -12,3 +12,17 @@
 #     }
 # }
 # Сможете ли вы вернуть отсортированный по ключам словарь?
+
+name_dict = {}
+
+
+def thesaurus_adv(*args):
+    for many_names in args:
+        any_names = list(filter(lambda el: str(" "+many_names.split()[1][0]) in el, args))
+        name_dict[many_names.split()[1][0]] = {}
+        for one_name in any_names:
+            over_names = filter(lambda el: el.startswith(one_name[0]), any_names)
+            name_dict[many_names.split()[1][0]][one_name[0]] = [*over_names]
+    return name_dict
+
+print(thesaurus_adv("Иван Сергеев", "Инна Серова", "Петр Алексеев", "Илья Иванов", "Анна Савельева"))
