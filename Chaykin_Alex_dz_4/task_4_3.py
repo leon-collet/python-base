@@ -18,7 +18,7 @@ def get_currency_rate(code):
     for valute in xml_parsed.getElementsByTagName("Valute"):
         if valute.getElementsByTagName("CharCode")[0].firstChild.nodeValue == code.upper():
             value = valute.getElementsByTagName("Value")[0].firstChild.nodeValue
-            return Decimal(value.replace(",", ".")), resp_date
+            return round(Decimal(value.replace(",", ".")), 2), resp_date
 
 
 # code = input("Курс какой валюты вас интересует? ")
