@@ -1,3 +1,4 @@
+# Задание 2. Курс Валюты
 # Написать функцию currency_rates(), принимающую в качестве аргумента код валюты (например, USD, EUR, GBP, ...)
 # и возвращающую курс этой валюты по отношению к рублю. Использовать библиотеку requests. В качестве API можно
 # использовать http://www.cbr.ru/scripts/XML_daily.asp. Рекомендация: выполнить предварительно запрос к API в
@@ -19,9 +20,9 @@ def currency_rates(code):
             value = valute.getElementsByTagName("Value")[0].firstChild.nodeValue
             return round(float(value.replace(",", ".")), 2)
 
+
 # code = input("Курс какой валюты вас интересует? ")
 # print(currency_rates(code))
 
 print(f'Курс Евро {currency_rates("EUR")} руб.')
 print(f'Курс доллара США {currency_rates("usd")} руб.')
-
