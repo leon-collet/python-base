@@ -15,10 +15,13 @@ def currency_rates(code):
     cdr_response = get('http://www.cbr.ru/scripts/XML_daily.asp')
     xml_parsed = minidom.parseString(cdr_response.text)
     for valute in xml_parsed.getElementsByTagName("Valute"):
-        if valute.getElementsByTagName("CharCode")[0].firstChild.nodeValue == code:
+        if valute.getElementsByTagName("CharCode")[0].firstChild.nodeValue == code.upper():
             value = valute.getElementsByTagName("Value")[0].firstChild.nodeValue
             return round(float(value.replace(",", ".")), 2)
 
-code = input("Курс какой валюты вас интересует? ").upper()
+# code = input("Курс какой валюты вас интересует? ")
+# print(currency_rates(code))
 
-print(currency_rates(code))
+print(f'Курс Евро {currency_rates("EUR")} руб.')
+print(f'Курс доллара США {currency_rates("usd")} руб.')
+
