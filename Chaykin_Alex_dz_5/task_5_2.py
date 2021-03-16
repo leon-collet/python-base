@@ -21,17 +21,27 @@ def rand_nums(nums):
         yield new_nums
 
 
-gen_nums = (new_num for new_num in rand_nums(41) if new_num%2!=0)
-
-i = 0
-
-while True:
-    i += 1
-    try:
-        print(f'{i} {next(gen_nums)}')
-    except:
-        break
+# gen_nums = (new_num for new_num in rand_nums(41) if new_num%2!=0)
+#
+# i = 0
+#
+# while True:
+#     i += 1
+#     try:
+#         print(f'{i} {next(gen_nums)}')
+#     except:
+#         break
 
 # В rand_nums надо передать 41, но лучше максимально большое число, так как даже если передать 1000000, то есть мизерный шанс,
 # что каждое рандомное число будет чётным. Вопрос был бы более интересен, если бы у нас стояла защита от повторений.
 # "Шанс что рандом за миллион попыток выдаст одно и тоже число незначителен, но никогда не равен нулю")
+
+# После выполнения третьего задания нашел enumerate в коде 5 семинара, короче было бы написать через неё
+
+gen_nums = ((i, new_num) for i, new_num in enumerate(rand_nums(40), start=1) if new_num%2!=0)
+
+while True:
+    try:
+        print(f'{(next(gen_nums))[0]} {(next(gen_nums))[1]}')
+    except:
+        break
