@@ -25,7 +25,7 @@
 
 import os
 
-with open('config.yaml', 'r+', encoding='utf-8') as f:
+with open('config.yaml', encoding='utf-8') as f:
     start_level = 0
     for line in f:
         num_level = line.count('|   ') + line.count('|--')

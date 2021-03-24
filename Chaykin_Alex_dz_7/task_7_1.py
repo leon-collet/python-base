@@ -10,17 +10,24 @@
 
 import os
 
-# Хранилище информации - список, чётные элементы это названия родительских директорий, нечётные - списки дочерних.
-# Скрипт стабильно работает только с двумя уровнями папок - уровень my_project и вложенные
+#dir_list = {'my_project': ['settings', 'mainapp', 'adminapp', 'authapp'], 'settings': ['templates', 'config'], 'mainapp': ['restapi']}
+dir_list = {'my_project': ['settings', 'mainapp', 'adminapp', 'authapp']}
 
-dir_list = ['my_project', ['settings', 'mainapp', 'adminapp', 'authapp']]
 
-for i in range(0, len(dir_list), 2):
-    dir_path = dir_list[i: i + 2]
-    if not os.path.exists(dir_path[0]):
-        os.mkdir(dir_path[0])
-    os.chdir(dir_path[0])
-    for dir_less in dir_path[1]:
-        if not os.path.exists(dir_less):
-            os.mkdir(dir_less)
-    os.chdir("..")
+def great_dir(new_dir):
+    if not os.path.exists(new_dir):
+        os.mkdir(new_dir)
+    os.chdir(new_dir)
+
+
+for key in dir_list:
+    great_dir(key)
+    for child in dir_list[key]:
+        great_dir(child)
+        os.chdir("..")
+    if key != 'my_project':
+        os.chdir("..")
+
+# Этот вариант решения выглядит более аккуратно и позволяет сделать два уровня вложенности, нужно только расширить словарь.
+# Словарь кажется оптимальным, так как не будет повторений папки и ясно видна структура. Создание файлов непредусмотрено
+# структурой в задании, по этому и не прописал.
