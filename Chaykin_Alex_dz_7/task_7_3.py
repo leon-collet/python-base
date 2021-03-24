@@ -33,6 +33,3 @@ for root, dirs, files in os.walk('.'):
             if not os.path.exists(os.path.join(copy_folder, copy_dir)):
                 os.mkdir(os.path.join(copy_folder, copy_dir))
         os.chdir(root_folder)
-
-
-
