@@ -12,8 +12,13 @@ import json
 import os
 from collections import defaultdict
 
-# Папку some_data скачал из списка файлов к уроку, так как в my_project все файлы создавал практически пустыми
-files_dir = 'some_data'
+# Папку some_data скачал из списка файлов к уроку (и удалил примерно половину),
+# так как в my_project все файлы создавал практически пустыми.
+# В отличие от прошлой задачи, чтение всей папки урока тут становится проблемой, так как у многих файлов нет расширения,
+# или есть две точки, что ещё хуже. При выборке расширения логично брать срез [:1], но мы ищем только обычные расширения файлов
+
+files_dir = '..'
+# files_dir = 'some_data'
 # files_dir = 'my_project'
 file_ext = defaultdict(set)
 file_sizes = defaultdict(int)
@@ -23,9 +28,14 @@ for root, dirs, files in os.walk(files_dir):
     for file in files:
         size = os.stat(os.path.join(root, file)).st_size
         order = 10**len(str(size))
-        extension = file.split('.')[1]
+        try:
+            extension = file.split('.')[1]
+            file_ext[order].add(extension)
+        except IndexError as e:
+            print(f'Файл имеет необычное расширение файла {file} вызвало ошибку {e}')
+        else:
+            file_ext[order].add('???')
         file_sizes[order] += 1
-        file_ext[order].add(extension)
 
 
 for ext, size in zip(sorted(file_ext), sorted(file_sizes)):

@@ -12,8 +12,12 @@
 import os
 from collections import defaultdict
 
-# Папку some_data скачал из списка файлов к уроку, так как в my_project все файлы создавал практически пустыми
-files_dir = 'some_data'
+# Папку some_data скачал из списка файлов к уроку (и удалил примерно половину),
+# так как в my_project все файлы создавал практически пустыми. Но интереснее чем some_data читать папку урока,
+# так файлов очень много.
+
+# files_dir = 'some_data'
+files_dir = '..'
 # files_dir = 'my_project'
 file_sizes = defaultdict(int)
 
