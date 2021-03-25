@@ -33,7 +33,6 @@ for root, dirs, files in os.walk(files_dir):
             file_ext[order].add(extension)
         except IndexError as e:
             print(f'Файл имеет необычное расширение файла {file} вызвало ошибку {e}')
-        else:
             file_ext[order].add('???')
         file_sizes[order] += 1
 
