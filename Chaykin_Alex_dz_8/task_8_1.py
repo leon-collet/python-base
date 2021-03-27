@@ -14,15 +14,17 @@
 
 import re
 
-RE_EMAIL = re.compile(r'^(\w+)\@(\w+\.\w+)$')
+RE_EMAIL = re.compile(r'^([^\@]+)\@([^\@]+\.\w{2,10})$')
 
 def email_parse(email):
-    try:
-        result = RE_EMAIL.findall(email)
+    result = RE_EMAIL.findall(email)
+    if result:
         return {'username': result[0][0], 'domain': result[0][1]}
-    except ValueError as e:
-        print(f'wrong email: {e}')
-        raise ValueError
+    else:
+        msg = f'wrong email: {email}'
+        raise ValueError(msg)
 
-# email_parse(input('Введите email: '))
-print(email_parse('someone@geekbrains.ru'))
+# print(email_parse(input('Введите email: ')))
+# print(email_parse('support@geekbrains.ru'))
+# print(email_parse('support@geekbrainsru'))
+print(email_parse('павелфролов@москва.онлайн'))
